@@ -6,6 +6,10 @@ author_name: Shmuel Fomberg
 author_link: http://www.sixapart.com/
 version: 1.00
 
+applications:
+    comments:
+        methods:
+            handle_sign_in: $BrowserIDCommenters::BrowserIDCommenters::Auth::handle_sign_in
 commenter_authenticators:
     BrowserID:
         class: BrowserIDCommenters::Auth
@@ -30,23 +34,23 @@ commenter_authenticators:
                     });
                 }
             </script>
-            <form id="browserid-signin-form" method="post" action="<mt:var name="script_url">">
-                <input type="hidden" name="__mode"   value="handle_sign_in">
-                <input type="hidden" name="blog_id"  value="<mt:var name="blog_id">">
-                <input type="hidden" name="entry_id" value="<mt:var name="entry_id">">
+            <form id="browserid-signin-form" method="post" action="<mt:var name="comment_script">">
+                <input type="hidden" name="__mode"   value="handle_sign_in" />
+                <input type="hidden" name="blog_id"  value="<mt:var name="blog_id">" />
+                <input type="hidden" name="entry_id" value="<mt:var name="entry_id">" />
                 <mt:if name="return_url">
-                    <input type="hidden" name="return_url" value="<mt:var name="return_url" escape="html">">
+                    <input type="hidden" name="return_url" value="<mt:var name="return_url" escape="html">" />
                 <mt:else>
-                    <input type="hidden" name="static"   value="<mt:var name="static">">
+                    <input type="hidden" name="static"   value="<mt:var name="static">" />
                 </mt:if>
-                <input type="hidden" name="key"      value="BrowserID">
-                <input type="hidden" name="browserid_assertion" id="browserid_assertion">
+                <input type="hidden" name="key"      value="BrowserID" />
+                <input type="hidden" name="browserid_assertion" id="browserid_assertion" />
             </form>
             <div>
                 <p id="browser-id-msg"></p>
                 <a href="#" class="bid_login" onclick="bid_login_clicked()">
-                    <img src='<mt:var name="static_uri">plugins/BrowserIDCommenters/sign_in_green.png' alt='Sign in'>
-                </img></a>
+                    <img src='<mt:var name="static_uri">plugins/BrowserIDCommenters/sign_in_green.png' alt='Sign in' />
+                </a>
             </div>
         login_form_params: BrowserIDCommenters::Auth::commenter_auth_params
         condition: BrowserIDCommenters::Auth::return_true

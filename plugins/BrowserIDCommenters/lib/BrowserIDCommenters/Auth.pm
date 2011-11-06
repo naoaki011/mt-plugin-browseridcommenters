@@ -71,6 +71,9 @@ sub commenter_auth_params {
         static  => $static,
     };
     $params->{entry_id} = $entry_id if defined $entry_id;
+    my $mt = MT->instance;
+    my $script = $mt->config ('CommentScript') || 'mt-comments.cgi';
+    $params->{comment_script} = $script;
     return $params;
 }
 
